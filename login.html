@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Masuk Akun</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Blok <style> yang error telah dihapus. Semua kelas Tailwind diterapkan langsung di HTML. -->
+</head>
+<body class="bg-slate-100 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-5">
+        
+        <div class="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl shadow-slate-300/50">
+
+            <!-- Header & Ilustrasi -->
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h1 class="text-2xl font-extrabold text-slate-900">Selamat datang kembali</h1>
+                    <p class="text-3xl font-extrabold text-bca-main mt-1">Masuk</p>
+                </div>
+                <!-- Placeholder Ilustrasi/Icon -->
+                <div class="w-16 h-16 bg-bca-light rounded-full flex items-center justify-center text-bca-main">
+                    <i data-lucide="lock" class="w-8 h-8"></i>
+                </div>
+            </div>
+
+            <!-- Form Login -->
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-6">
+                
+                <!-- Input No Handphone -->
+                <div>
+                    <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">No Handphone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Contoh: 081234567890" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-bca-main focus:border-bca-main transition">
+                </div>
+                
+                <!-- Input Kata Sandi -->
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-slate-700 mb-2">Kata Sandi</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" placeholder="Masukkan kata sandi Anda" required class="w-full p-3 border border-slate-300 rounded-xl pr-10 focus:ring-bca-main focus:border-bca-main transition">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-bca-main">
+                            <i data-lucide="eye" id="togglePasswordIcon" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lupa Kata Sandi -->
+                <div class="text-right">
+                    <a href="#" class="text-xs font-medium text-bca-main hover:text-bca-dark">Lupa Kata Sandi?</a>
+                </div>
+
+                <!-- Tombol Masuk -->
+                <button type="submit" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-bca-main/30 hover:bg-bca-dark transition duration-200">
+                    Masuk
+                </button>
+            </form>
+
+            <div id="messageBox" class="mt-4 hidden p-3 rounded-lg text-sm text-center"></div>
+        </div>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Fungsi untuk menampilkan/menyembunyikan kata sandi
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const icon = document.getElementById('togglePasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                passwordInput.type = 'password';
+                icon.setAttribute('data-lucide', 'eye');
+            }
+            lucide.createIcons(); // Re-render icon
+        }
+
+        // Fungsi Simulasi Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const messageBox = document.getElementById('messageBox');
+            
+            // Simulasi proses otentikasi
+            if (phone.trim() === '081234567890' && password === '123456') {
+                showMessage('Login berhasil! Mengalihkan ke verifikasi OTP...', 'success');
+                // Alihkan ke halaman OTP setelah jeda
+                setTimeout(() => {
+                    window.location.href = 'otp_verification.html';
+                }, 100);
+            } else {
+                showMessage('Nomor Handphone atau Kata Sandi salah.', 'error');
+            }
+        }
+
+        // Fungsi utilitas untuk menampilkan pesan
+        function showMessage(message, type) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.className = 'mt-4 p-3 rounded-lg text-sm text-center block';
+            if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            } else if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            }
+        }
+    </script>
+</body>
+</html>

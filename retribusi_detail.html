@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Detail Tagihan</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Back Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <a href="index.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Detail Tagihan</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <!-- BAGIAN DETAIL KIOS (Area 1) -->
+                <section class="mb-6">
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 space-y-4 flex items-start gap-4">
+                        
+                        <!-- Placeholder Kios/Gambar -->
+                        <div class="w-16 h-16 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="store" class="w-8 h-8 text-bca-main"></i>
+                        </div>
+
+                        <!-- Info Kios -->
+                        <div class="flex-1">
+                            <h3 class="font-bold text-slate-800 text-lg mb-1">Kios A-12 (Pasar Maju)</h3>
+                            <p class="text-sm text-slate-500 mb-2">Nama Pedagang: Budi Santoso</p>
+                            
+                            <div class="flex items-center text-sm">
+                                <span class="font-semibold text-red-600">Rp 15.000</span>
+                                <span class="text-slate-400 mx-2">•</span>
+                                <span class="text-red-600 font-medium">Belum Lunas</span>
+                            </div>
+                        </div>
+
+                        <!-- Status/Aksi -->
+                        <div class="flex-shrink-0 text-right">
+                            <button class="text-xs text-bca-main font-bold hover:underline">
+                                <i data-lucide="file-text" class="w-4 h-4 inline-block mr-1"></i>
+                                Info Kios
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- RINCIAN TAGIHAN (Area 2) -->
+                <section class="mb-6">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4">Rincian Tagihan Belum Lunas</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-4">
+                        
+                        <!-- Rincian Item 1: Retribusi Kebersihan -->
+                        <div class="flex justify-between items-center pb-2 border-b border-dashed border-slate-100">
+                            <span class="text-sm text-slate-500">Retribusi Kebersihan (Nov 2025)</span>
+                            <span class="text-sm font-semibold text-slate-800">Rp 5.000</span>
+                        </div>
+
+                        <!-- Rincian Item 2: Retribusi Keamanan -->
+                        <div class="flex justify-between items-center pb-2 border-b border-dashed border-slate-100">
+                            <span class="text-sm text-slate-500">Retribusi Keamanan (Nov 2025)</span>
+                            <span class="text-sm font-semibold text-slate-800">Rp 5.000</span>
+                        </div>
+
+                         <!-- Rincian Item 3: Retribusi Penggunaan Fasilitas -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-500">Retribusi Fasilitas (Nov 2025)</span>
+                            <span class="text-sm font-semibold text-slate-800">Rp 5.000</span>
+                        </div>
+                        
+                        <!-- Divider & Total -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-bca-dark">TOTAL TAGIHAN</span>
+                                <span class="text-xl font-bold text-bca-dark">Rp 15.000</span>
+                            </div>
+                            <p class="text-xs text-red-500 mt-1">Jatuh Tempo: 25 November 2025</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TOMBOL BAYAR SEKARANG (Fixed Footer) -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <!-- Arahkan ke halaman Konfirmasi Pembayaran -->
+                <a href="retribusi_konfirmasi.html" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/50 hover:bg-bca-dark transition block text-center">
+                    BAYAR SEKARANG (Rp 15.000)
+                </a>
+            </footer>
+
+        </main>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Selamat Datang</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800 flex items-center justify-center min-h-screen p-5">
+
+    <div class="w-full max-w-sm text-center">
+        
+        <!-- Kartu Utama / Logo -->
+        <div class="bg-white rounded-3xl p-10 card-shadow mb-12">
+            <!-- Placeholder Logo/Ilustrasi -->
+            <div class="w-24 h-24 bg-bca-light rounded-full mx-auto flex items-center justify-center text-bca-main mb-6">
+                <i data-lucide="line-chart" class="w-12 h-12"></i>
+            </div>
+            
+            <h1 class="text-2xl font-bold text-bca-dark">Pasar Cerdas</h1>
+            <p class="text-sm text-slate-500 mt-1">Platform Manajemen Retribusi Digital</p>
+        </div>
+
+        <!-- Tombol Masuk -->
+        <a href="login.html" class="inline-block w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-bca-main/30 hover:bg-bca-dark transition duration-200">
+            Masuk
+        </a>
+
+        <p class="text-xs text-slate-400 mt-6">© 2025 Pasar Cerdas</p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Logika untuk redirect otomatis ke dashboard jika sudah login (tidak diimplementasikan di sini)
+    </script>
+</body>
+</html>

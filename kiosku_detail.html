@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Detail KiosKu</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        /* Kelas input-label dan input-field telah dipindahkan/diubah langsung di HTML */
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Dashboard KiosKu -->
+                <a href="kiosku_dashboard.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Detail KiosKu</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-xl mx-auto w-full">
+                
+                <form id="kiosku-form" class="bg-white p-6 rounded-2xl shadow-lg border border-slate-100">
+                    
+                    <!-- Foto Kios -->
+                    <div class="flex flex-col items-center mb-6">
+                        <div class="w-24 h-24 bg-slate-200 rounded-full flex items-center justify-center mb-2 overflow-hidden border-4 border-bca-light" id="kios-photo-preview">
+                            <i data-lucide="camera" class="w-8 h-8 text-slate-500"></i>
+                        </div>
+                        <label for="photo-upload" class="text-sm text-bca-main font-semibold cursor-pointer hover:underline">
+                            Ubah Foto Kios
+                        </label>
+                        <input type="file" id="photo-upload" accept="image/*" class="hidden">
+                    </div>
+
+                    <!-- 1. Nama Kios -->
+                    <label for="nama_kios" class="text-sm font-semibold text-slate-700 block mb-1 mt-4">Nama Kios</label>
+                    <input type="text" id="nama_kios" value="Kios Utama - Blok A No. 12" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-bca-main focus:border-bca-main transition duration-150 ease-in-out" required>
+
+                    <!-- 2. Nomor Telepon -->
+                    <label for="nomor_telepon" class="text-sm font-semibold text-slate-700 block mb-1 mt-4">Nomor Telepon</label>
+                    <input type="tel" id="nomor_telepon" value="081234567890" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-bca-main focus:border-bca-main transition duration-150 ease-in-out" required>
+
+                    <!-- 3. Alamat -->
+                    <label for="alamat" class="text-sm font-semibold text-slate-700 block mb-1 mt-4">Alamat Kios</label>
+                    <textarea id="alamat" rows="3" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-bca-main focus:border-bca-main transition duration-150 ease-in-out resize-none">Pasar Tradisional, Blok A No. 12, Lantai Dasar</textarea>
+
+                    <!-- 4. Deskripsi Kios -->
+                    <label for="deskripsi_kios" class="text-sm font-semibold text-slate-700 block mb-1 mt-4">Deskripsi Kios</label>
+                    <textarea id="deskripsi_kios" rows="4" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-bca-main focus:border-bca-main transition duration-150 ease-in-out resize-none">Menyediakan sayur mayur segar, bumbu dapur lengkap, dan aneka kebutuhan pokok harian. Buka setiap hari 06:00 - 15:00.</textarea>
+                    
+                    <!-- 5. Status Ketersediaan (Optional) -->
+                    <label class="text-sm font-semibold text-slate-700 block mb-1 mt-4">Status Ketersediaan</label>
+                    <div class="flex items-center gap-6 mt-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="status_kios" value="available" class="form-radio h-4 w-4 text-green-500 border-gray-300" checked>
+                            <span class="ml-2 text-sm text-slate-700">Tersedia (Buka)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="status_kios" value="unavailable" class="form-radio h-4 w-4 text-red-500 border-gray-300">
+                            <span class="ml-2 text-sm text-slate-700">Tidak Tersedia (Tutup)</span>
+                        </label>
+                    </div>
+
+                    <!-- Tombol Simpan -->
+                    <button type="submit" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/50 hover:bg-bca-dark transition mt-8">
+                        Simpan Perubahan
+                    </button>
+                </form>
+
+                <!-- Informasi Tambahan -->
+                <div class="mt-6 text-center text-xs text-slate-500 p-4">
+                    <p>* Perubahan detail kios memerlukan verifikasi dari pihak pengelola pasar.</p>
+                </div>
+            </div>
+
+            <!-- Placeholder Footer/Navbar Bawah -->
+            <footer class="md:hidden bg-white border-t border-slate-200 p-4 pb-safe flex justify-around"></footer>
+
+        </main>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Pengganti alert()
+        function showNotification(message, type = 'success') {
+            const body = document.body;
+            let bgColor = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+            
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-20 left-1/2 transform -translate-x-1/2 ${bgColor} text-white px-4 py-3 rounded-lg shadow-xl z-50 transition-all duration-300 ease-in-out opacity-0`;
+            notification.textContent = message;
+            body.appendChild(notification);
+            
+            // Show
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.bottom = '16px';
+            }, 10);
+
+            // Hide
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.bottom = '100px';
+                setTimeout(() => body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        document.getElementById('kiosku-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Implementasi logika simpan data ke Firestore di sini
+            console.log('Data Kios disimpan:', {
+                nama: document.getElementById('nama_kios').value,
+                telepon: document.getElementById('nomor_telepon').value,
+                alamat: document.getElementById('alamat').value,
+                deskripsi: document.getElementById('deskripsi_kios').value,
+                status: document.querySelector('input[name="status_kios"]:checked').value
+            });
+            
+            showNotification('Perubahan berhasil disimpan! Menunggu verifikasi.');
+        });
+        
+        // Logika sederhana untuk preview foto
+        document.getElementById('photo-upload').addEventListener('change', function(e) {
+            const preview = document.getElementById('kios-photo-preview');
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview.innerHTML = `<img src="${event.target.result}" alt="Foto Kios" class="w-full h-full object-cover">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

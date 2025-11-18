@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Daftar Tutorial</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .tutorial-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .tutorial-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Back Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Beranda (index.html) -->
+                <a href="index.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Tutorial Penggunaan</h1>
+                
+                <!-- Placeholder untuk fitur pencarian/settings di wireframe -->
+                <div class="ml-auto flex gap-2">
+                    <button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <p class="text-sm text-slate-500 mb-6">Pilih panduan di bawah ini untuk memulai.</p>
+
+                <div class="space-y-4">
+                    
+                    <!-- Tutorial Card 1: Cara Bayar Retribusi -->
+                    <a href="tutorial_detail.html?id=1" class="tutorial-card block bg-white rounded-xl shadow-md border border-slate-100 p-4 flex items-center gap-4">
+                        <!-- Area Gambar/Video Preview -->
+                        <div class="w-16 h-16 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="receipt" class="w-8 h-8 text-bca-main"></i>
+                        </div>
+                        
+                        <!-- Info Tutorial -->
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base text-slate-800">Cara Pembayaran Retribusi Pasar</h3>
+                            <p class="text-xs text-slate-500">Panduan lengkap langkah demi langkah.</p>
+                        </div>
+                        
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+
+                    <!-- Tutorial Card 2: Cek Histori Transaksi -->
+                    <a href="tutorial_detail.html?id=2" class="tutorial-card block bg-white rounded-xl shadow-md border border-slate-100 p-4 flex items-center gap-4">
+                        <div class="w-16 h-16 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="history" class="w-8 h-8 text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base text-slate-800">Melihat Riwayat Transaksi</h3>
+                            <p class="text-xs text-slate-500">Cara cek tagihan yang sudah lunas.</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+                    
+                    <!-- Tutorial Card 3: Kelola Kios -->
+                    <a href="tutorial_detail.html?id=3" class="tutorial-card block bg-white rounded-xl shadow-md border border-slate-100 p-4 flex items-center gap-4">
+                        <div class="w-16 h-16 bg-amber-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="store" class="w-8 h-8 text-amber-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base text-slate-800">Mengelola Data KiosKu</h3>
+                            <p class="text-xs text-slate-500">Ubah info dan status kios Anda.</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+
+                    <!-- Tutorial Card 4: Top Up Saldo -->
+                    <a href="tutorial_detail.html?id=4" class="tutorial-card block bg-white rounded-xl shadow-md border border-slate-100 p-4 flex items-center gap-4">
+                        <div class="w-16 h-16 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="plus-circle" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base text-slate-800">Cara Top Up Saldo Retribusi</h3>
+                            <p class="text-xs text-slate-500">Petunjuk pengisian saldo via bank.</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+                    
+                    <!-- Tutorial Card 5: Pengaturan Akun -->
+                    <a href="tutorial_detail.html?id=5" class="tutorial-card block bg-white rounded-xl shadow-md border border-slate-100 p-4 flex items-center gap-4">
+                        <div class="w-16 h-16 bg-red-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="settings" class="w-8 h-8 text-red-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-base text-slate-800">Mengubah Profil dan PIN</h3>
+                            <p class="text-xs text-slate-500">Jaga keamanan akun Anda.</p>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+                    
+                </div>
+            </div>
+
+            <!-- Placeholder Footer/Navbar Bawah -->
+            <footer class="md:hidden bg-white border-t border-slate-200 p-4 pb-safe flex justify-around"></footer>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

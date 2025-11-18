@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Pembayaran QRIS</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: { dark: '#003D79', main: '#0060AF', light: '#E5F3FF', gold: '#DAA520', }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Konfirmasi Pembayaran -->
+                <a href="retribusi_konfirmasi.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Pembayaran QRIS</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <!-- KARTU QRIS -->
+                <section class="mb-6">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4 text-center">Scan untuk Bayar Rp 15.000</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 flex flex-col items-center">
+                        
+                        <!-- Header Kios -->
+                        <div class="mb-4 text-center">
+                            <h3 class="font-bold text-slate-800 text-base">Retribusi Kios A-12</h3>
+                            <p class="text-xs text-slate-500">Merchant: PASAR CERDAS BDG</p>
+                        </div>
+                        
+                        <!-- Area QR Code (Placeholder SVG) -->
+                        <!-- Menggunakan SVG untuk QR code mockup -->
+                        <div class="p-4 bg-white border border-slate-200 rounded-lg shadow-md mb-6 w-full max-w-xs">
+                            <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                                <rect width="256" height="256" fill="white"/>
+                                <!-- Placeholder QR Code pattern, dark blocks -->
+                                <g fill="black">
+                                    <rect x="25" y="25" width="40" height="40"/>
+                                    <rect x="191" y="25" width="40" height="40"/>
+                                    <rect x="25" y="191" width="40" height="40"/>
+                                    
+                                    <rect x="35" y="35" width="20" height="20" fill="white"/>
+                                    <rect x="201" y="35" width="20" height="20" fill="white"/>
+                                    <rect x="35" y="201" width="20" height="20" fill="white"/>
+
+                                    <rect x="100" y="100" width="10" height="10"/>
+                                    <rect x="120" y="120" width="10" height="10"/>
+                                    <rect x="140" y="140" width="10" height="10"/>
+                                    
+                                    <rect x="150" y="100" width="10" height="10"/>
+                                    <rect x="170" y="110" width="10" height="10"/>
+                                    <rect x="100" y="150" width="10" height="10"/>
+                                    <rect x="110" y="170" width="10" height="10"/>
+                                </g>
+                                <!-- Logo di tengah QRIS (Optional) -->
+                                <circle cx="128" cy="128" r="20" fill="#0060AF"/>
+                                <text x="128" y="135" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Q</text>
+                            </svg>
+                        </div>
+
+                        <!-- Keterangan -->
+                        <div class="text-sm text-center text-slate-600 mb-6">
+                            <p class="font-semibold text-bca-main">Kode QRIS berlaku hingga 30 menit ke depan.</p>
+                            <p class="text-xs text-slate-400 mt-1">Gunakan aplikasi Bank/E-Wallet favorit Anda untuk scan.</p>
+                        </div>
+
+                        <!-- Detail Jumlah -->
+                        <div class="w-full pt-4 border-t border-dashed border-slate-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-sm text-slate-500">Nominal Pembayaran</span>
+                                <span class="text-sm font-semibold text-slate-800">Rp 15.000</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-500">Tanggal Transaksi</span>
+                                <span class="text-sm font-semibold text-slate-800">20 Nov 2025</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+
+            <!-- TOMBOL DOWNLOAD (Fixed Footer) -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <button class="w-full bg-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-300 transition flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    DOWNLOAD QR
+                </button>
+                <button onclick="window.location.href='index.html';" class="w-full mt-2 text-bca-main font-bold py-3 rounded-xl hover:bg-slate-50 transition">
+                    Kembali ke Beranda
+                </button>
+            </footer>
+
+        </main>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

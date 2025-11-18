@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Informasi Transaksi</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        /* Kelas .detail-row, .detail-label, dan .detail-value telah dipindahkan ke dalam HTML */
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Daftar Riwayat -->
+                <a href="history_list.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Informasi Transaksi</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-xl mx-auto w-full">
+                
+                <!-- Status Transaksi Header -->
+                <div class="bg-white rounded-xl p-6 text-center shadow-md border border-slate-100 mb-6">
+                    <i data-lucide="check-circle" class="w-10 h-10 text-green-500 mx-auto mb-3"></i>
+                    <p class="text-xl font-bold text-slate-800 mb-1">Rp 50.000</p>
+                    <p class="text-sm font-semibold text-green-600">Pembayaran Berhasil</p>
+                    <p class="text-xs text-slate-500 mt-2">Nomor Referensi: TXN-20251125-12345</p>
+                </div>
+
+                <!-- Rincian Transaksi -->
+                <section class="bg-white rounded-xl p-6 shadow-md border border-slate-100">
+                    <h2 class="font-bold text-lg text-slate-800 mb-3">Rincian Transaksi</h2>
+
+                    <div class="space-y-1">
+                        
+                        <!-- Jenis Transaksi -->
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Jenis Transaksi</span>
+                            <span class="text-sm font-medium text-slate-700 text-right">Pembayaran Retribusi</span>
+                        </div>
+                        
+                        <!-- Kios Terkait -->
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Kios Terkait</span>
+                            <span class="text-sm font-medium text-slate-700 text-right">Kios Utama - Blok A No. 12</span>
+                        </div>
+
+                        <!-- Tanggal & Waktu -->
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Tanggal & Waktu</span>
+                            <span class="text-sm font-medium text-slate-700 text-right">25 November 2025, 10:30 WIB</span>
+                        </div>
+
+                        <!-- Metode Pembayaran -->
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Metode Pembayaran</span>
+                            <span class="text-sm font-medium text-slate-700 text-right">Saldo Retribusi</span>
+                        </div>
+
+                        <!-- Biaya Admin -->
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-sm text-slate-500">Biaya Admin</span>
+                            <span class="text-sm font-medium text-slate-700 text-right">Rp 0</span>
+                        </div>
+                        
+                        <!-- Total Pembayaran -->
+                        <div class="flex justify-between py-2 pt-4">
+                            <span class="text-base font-bold text-slate-800">Total Pembayaran</span>
+                            <span class="text-base font-bold text-red-600">Rp 50.000</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Bantuan/Dukungan -->
+                <section class="mt-6">
+                    <button class="w-full text-center text-bca-main text-sm font-semibold py-3 hover:text-bca-dark transition">
+                        <i data-lucide="help-circle" class="w-4 h-4 inline-block mr-2 -mt-0.5"></i>
+                        Butuh Bantuan? Hubungi Dukungan
+                    </button>
+                </section>
+                
+            </div>
+
+            <!-- Tombol Kembali (Fixed Footer) -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <a href="history_list.html" class="block w-full text-center bg-slate-100 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-200 transition">
+                    Kembali
+                </a>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Fungsi untuk mengambil ID dari URL (untuk demo)
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Logika untuk memuat data detail berdasarkan ID (Simulasi)
+        window.onload = function() {
+            const transactionId = getUrlParameter('id');
+            // Di sini Anda akan memanggil API atau database untuk mengambil detail transaksi
+            if (transactionId) {
+                console.log(`Memuat detail untuk Transaksi ID: ${transactionId}`);
+                // Implementasi untuk memuat data ke UI jika ini adalah aplikasi nyata
+            }
+        };
+    </script>
+</body>
+</html>

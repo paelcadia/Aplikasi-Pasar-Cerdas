@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Pasar Cerdas - Detail Tutorial</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        /* Kelas tutorial-step dan step-number telah dipindahkan/diubah langsung di HTML */
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Back Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Daftar Tutorial -->
+                <a href="tutorial_list.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 id="header-title" class="font-bold text-xl text-bca-dark ml-4">Detail Tutorial</h1>
+                
+                <div class="ml-auto flex gap-2">
+                    <button class="p-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                        <i data-lucide="share-2" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <div class="bg-white rounded-2xl shadow-lg border border-slate-100 mb-6 overflow-hidden">
+                    <!-- Area Gambar/Video Header -->
+                    <div id="tutorial-image" class="w-full h-48 bg-bca-light flex items-center justify-center">
+                        <i data-lucide="play-circle" class="w-16 h-16 text-bca-main/80"></i>
+                    </div>
+
+                    <!-- Judul & Deskripsi -->
+                    <div class="p-6">
+                        <h2 id="tutorial-title" class="font-bold text-2xl text-slate-800 mb-3">Judul Tutorial</h2>
+                        
+                        <h3 class="font-semibold text-base text-slate-700 mb-2">Deskripsi Singkat</h3>
+                        <p id="tutorial-description" class="text-sm text-slate-600 leading-relaxed">
+                            Deskripsi lengkap tentang cara melakukan aksi ini di aplikasi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Langkah-langkah -->
+                <section class="mb-8">
+                    <h3 class="font-bold text-xl text-slate-700 mb-4">Langkah-langkah</h3>
+                    
+                    <div id="tutorial-steps" class="space-y-4">
+                        <!-- Langkah-langkah akan diisi oleh JavaScript -->
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-start gap-4">
+                            <span class="w-8 h-8 flex-shrink-0 bg-bca-main text-white font-bold rounded-full flex items-center justify-center">1</span>
+                            <p class="text-sm text-slate-700">Langkah 1: Klik tombol "Retribusi" di Beranda.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-start gap-4">
+                            <span class="w-8 h-8 flex-shrink-0 bg-bca-main text-white font-bold rounded-full flex items-center justify-center">2</span>
+                            <p class="text-sm text-slate-700">Langkah 2: Pilih tagihan yang ingin Anda bayar.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-start gap-4">
+                            <span class="w-8 h-8 flex-shrink-0 bg-bca-main text-white font-bold rounded-full flex items-center justify-center">3</span>
+                            <p class="text-sm text-slate-700">Langkah 3: Lanjutkan ke halaman konfirmasi dan pilih metode pembayaran.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-start gap-4">
+                            <span class="w-8 h-8 flex-shrink-0 bg-bca-main text-white font-bold rounded-full flex items-center justify-center">4</span>
+                            <p class="text-sm text-slate-700">Langkah 4: Masukkan PIN Transaksi Anda untuk menyelesaikan pembayaran.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tombol Aksi (Fixed Footer) -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <button id="btn-mulai" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/50 hover:bg-bca-dark transition">
+                    MULAI TUTORIAL
+                </button>
+            </footer>
+
+        </main>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Data Tutorial (Mock Data)
+        const tutorials = {
+            '1': {
+                title: 'Cara Pembayaran Retribusi Pasar',
+                description: 'Panduan ini akan memandu Anda melalui proses pembayaran tagihan retribusi kios Anda menggunakan Saldo Retribusi atau QRIS secara aman dan cepat.',
+                steps: [
+                    'Dari Beranda, klik menu "Retribusi".',
+                    'Pilih kios yang memiliki tagihan belum lunas.',
+                    'Pada halaman Detail Tagihan, klik tombol "Bayar Sekarang".',
+                    'Pilih metode pembayaran (Saldo Retribusi atau QRIS).',
+                    'Konfirmasi total dan lanjutkan dengan Input PIN (untuk Saldo) atau Scan QRIS (untuk QRIS).'
+                ],
+                actionLink: 'retribusi_detail.html' // Arahkan ke halaman pertama alur pembayaran
+            },
+            '2': {
+                title: 'Melihat Riwayat Transaksi',
+                description: 'Cari tahu cara memeriksa semua transaksi retribusi yang sudah Anda lakukan, baik yang berhasil maupun yang tertunda.',
+                steps: [
+                    'Dari Beranda, klik menu "Riwayat".',
+                    'Anda akan melihat daftar semua transaksi Anda, urut berdasarkan tanggal terbaru.',
+                    'Gunakan filter di bagian atas untuk menyaring transaksi berdasarkan jenis (Retribusi, Top Up, dll.)',
+                    'Klik pada salah satu item riwayat untuk melihat detail lengkap transaksi tersebut.'
+                ],
+                actionLink: 'index.html' // Arahkan ke Beranda
+            },
+            '3': {
+                title: 'Mengelola Data KiosKu',
+                description: 'Pelajari cara memperbarui informasi kios Anda, seperti status ketersediaan atau detail kontak pedagang.',
+                steps: [
+                    'Dari Beranda, klik menu "KiosKu".',
+                    'Pilih kios yang informasinya ingin Anda ubah.',
+                    'Klik ikon Edit atau tombol "Ubah Data Kios".',
+                    'Masukkan data baru (contoh: status ketersediaan) dan simpan perubahan.'
+                ],
+                actionLink: 'index.html' // Arahkan ke Beranda
+            }
+            // Tambahkan tutorial lain (id 4, 5, dst.) jika diperlukan
+        };
+
+        // Fungsi untuk mengambil parameter dari URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Fungsi untuk memuat data tutorial
+        function loadTutorialDetail() {
+            const tutorialId = getUrlParameter('id');
+            const tutorial = tutorials[tutorialId] || tutorials['1']; // Default ke ID 1 jika tidak ada
+
+            // Update Judul Halaman dan Header
+            document.getElementById('page-title').textContent = `Pasar Cerdas - ${tutorial.title}`;
+            document.getElementById('header-title').textContent = tutorial.title;
+            
+            // Update Konten
+            document.getElementById('tutorial-title').textContent = tutorial.title;
+            document.getElementById('tutorial-description').textContent = tutorial.description;
+            
+            // Render Langkah-langkah
+            const stepsContainer = document.getElementById('tutorial-steps');
+            stepsContainer.innerHTML = ''; // Kosongkan container
+            
+            tutorial.steps.forEach((step, index) => {
+                const stepElement = document.createElement('div');
+                stepElement.className = 'p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-start gap-4';
+                stepElement.innerHTML = `
+                    <span class="w-8 h-8 flex-shrink-0 bg-bca-main text-white font-bold rounded-full flex items-center justify-center">${index + 1}</span>
+                    <p class="text-sm text-slate-700">${step}</p>
+                `;
+                stepsContainer.appendChild(stepElement);
+            });
+
+            // Set Action Button
+            const btnMulai = document.getElementById('btn-mulai');
+            btnMulai.textContent = `MULAI ${tutorial.title.toUpperCase()}`;
+            btnMulai.addEventListener('click', () => {
+                // Arahkan ke halaman simulasi atau halaman aksi terkait
+                window.location.href = tutorial.actionLink;
+            });
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        window.onload = loadTutorialDetail;
+    </script>
+</body>
+</html>

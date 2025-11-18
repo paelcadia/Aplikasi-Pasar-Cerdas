@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Dashboard KiosKu</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .stat-card {
+            transition: transform 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Action Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Beranda (index.html) -->
+                <a href="index.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Dashboard KiosKu</h1>
+                
+                <!-- Action Button: Edit Kios Detail -->
+                <a href="kiosku_detail.html" class="ml-auto p-2 text-bca-main hover:bg-bca-light rounded-full" title="Ubah Detail Kios">
+                    <i data-lucide="pencil-line" class="w-6 h-6"></i>
+                </a>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-4xl mx-auto w-full">
+                
+                <!-- 1. Statistik Ringkasan -->
+                <section class="grid grid-cols-2 gap-4 mb-6">
+                    
+                    <!-- Card Pendapatan -->
+                    <div class="stat-card bg-white rounded-xl p-4 flex flex-col justify-between border-b-4 border-b-green-500">
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-sm font-semibold text-slate-500">Total Pendapatan (Bulan Ini)</h2>
+                            <i data-lucide="wallet" class="w-5 h-5 text-green-500"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">Rp 4.560.000</p>
+                        <p class="text-xs text-green-600 mt-1">
+                            +12% dari bulan lalu
+                        </p>
+                    </div>
+
+                    <!-- Card Transaksi -->
+                    <div class="stat-card bg-white rounded-xl p-4 flex flex-col justify-between border-b-4 border-b-bca-main">
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="text-sm font-semibold text-slate-500">Jumlah Transaksi (7 Hari)</h2>
+                            <i data-lucide="bar-chart-2" class="w-5 h-5 text-bca-main"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-slate-800">145</p>
+                        <p class="text-xs text-slate-500 mt-1">
+                            8 Transaksi Hari Ini
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 2. Riwayat Transaksi -->
+                <section class="mt-8">
+                    <h2 class="font-bold text-xl text-slate-700 mb-4">Riwayat Transaksi Harian</h2>
+
+                    <div class="bg-white rounded-xl shadow-md border border-slate-100 divide-y divide-slate-100 overflow-hidden">
+                        
+                        <!-- Transaksi Item -->
+                        <div class="p-4 flex justify-between items-center">
+                            <div>
+                                <p class="font-medium text-slate-800">Penjualan Harian</p>
+                                <p class="text-xs text-slate-500">18 November 2025, 14:30</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-green-600">+ Rp 350.000</p>
+                                <p class="text-xs text-slate-400">Tunai</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex justify-between items-center">
+                            <div>
+                                <p class="font-medium text-slate-800">Penjualan Harian</p>
+                                <p class="text-xs text-slate-500">18 November 2025, 11:15</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-green-600">+ Rp 125.000</p>
+                                <p class="text-xs text-slate-400">QRIS</p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 flex justify-between items-center">
+                            <div>
+                                <p class="font-medium text-slate-800">Penjualan Harian</p>
+                                <p class="text-xs text-slate-500">17 November 2025, 16:45</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-green-600">+ Rp 510.000</p>
+                                <p class="text-xs text-slate-400">Tunai</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex justify-between items-center">
+                            <div>
+                                <p class="font-medium text-slate-800">Pembayaran Retribusi (Otomatis)</p>
+                                <p class="text-xs text-slate-500">17 November 2025, 08:00</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-red-600">- Rp 15.000</p>
+                                <p class="text-xs text-slate-400">Saldo Retribusi</p>
+                            </div>
+                        </div>
+
+                        <!-- Tombol Lihat Semua Riwayat -->
+                        <div class="p-4 text-center">
+                            <button class="text-sm font-semibold text-bca-main hover:text-bca-dark transition">
+                                Lihat Semua Riwayat
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 3. Informasi Kios (Link Cepat) -->
+                <section class="mt-8 pt-4 border-t border-slate-200">
+                    <h2 class="font-bold text-xl text-slate-700 mb-4">Informasi Kios</h2>
+                    
+                    <a href="kiosku_detail.html" class="block bg-white rounded-xl p-4 shadow-md border border-slate-100 flex items-center justify-between hover:bg-slate-50 transition">
+                        <div class="flex items-center gap-4">
+                            <i data-lucide="store" class="w-6 h-6 text-bca-main"></i>
+                            <div>
+                                <p class="font-medium text-slate-800">Kios Utama - Blok A No. 12</p>
+                                <p class="text-xs text-slate-500">Klik untuk mengubah data kios</p>
+                            </div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </a>
+                </section>
+
+            </div>
+
+            <!-- Placeholder Footer/Navbar Bawah -->
+            <footer class="md:hidden bg-white border-t border-slate-200 p-4 pb-safe flex justify-around"></footer>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

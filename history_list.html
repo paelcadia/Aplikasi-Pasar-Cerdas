@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Riwayat Pembayaran</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',
+                            main: '#0060AF',
+                            light: '#E5F3FF',
+                            gold: '#DAA520',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .history-item {
+            transition: background-color 0.2s;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+        .history-item:hover {
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- Sidebar dan Main Wrapper (struktur yang sama) -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Action Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Beranda (index.html) -->
+                <a href="index.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Riwayat Pembayaran</h1>
+                
+                <!-- Action Button: Filter/Pencarian -->
+                <button class="ml-auto p-2 text-slate-600 hover:bg-slate-50 rounded-full" title="Cari atau Filter">
+                    <i data-lucide="filter" class="w-6 h-6"></i>
+                </button>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <!-- Filter Kategori Transaksi -->
+                <div class="flex space-x-3 mb-6 overflow-x-auto pb-2 -mt-1">
+                    <button class="flex-shrink-0 bg-bca-main text-white text-sm font-semibold px-4 py-2 rounded-full shadow-md">Semua</button>
+                    <button class="flex-shrink-0 bg-white text-slate-600 text-sm font-semibold px-4 py-2 rounded-full border border-slate-300 hover:border-bca-main">Retribusi</button>
+                    <button class="flex-shrink-0 bg-white text-slate-600 text-sm font-semibold px-4 py-2 rounded-full border border-slate-300 hover:border-bca-main">Penarikan/Pencairan</button>
+                    <button class="flex-shrink-0 bg-white text-slate-600 text-sm font-semibold px-4 py-2 rounded-full border border-slate-300 hover:border-bca-main">Top Up Saldo</button>
+                </div>
+
+                <!-- Daftar Riwayat Transaksi -->
+                <section class="space-y-3">
+                    
+                    <!-- Item Transaksi Berhasil -->
+                    <a href="history_detail.html?id=123" class="history-item block bg-white rounded-xl p-4 flex items-center justify-between border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <!-- Icon Kategori -->
+                            <div class="w-10 h-10 bg-bca-light rounded-lg flex items-center justify-center">
+                                <i data-lucide="file-text" class="w-5 h-5 text-bca-main"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">Pembayaran Retribusi Kios A12</p>
+                                <p class="text-xs text-slate-500 mt-0.5">25 November 2025 | Berhasil</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-red-600">- Rp 50.000</p>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                    </a>
+
+                    <!-- Item Transaksi Pemasukan (Pencairan) -->
+                    <a href="history_detail.html?id=124" class="history-item block bg-white rounded-xl p-4 flex items-center justify-between border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="banknote" class="w-5 h-5 text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">Pencairan Dana ke Rekening</p>
+                                <p class="text-xs text-slate-500 mt-0.5">24 November 2025 | Berhasil</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-green-600">+ Rp 1.500.000</p>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                    </a>
+
+                    <!-- Item Transaksi Top Up -->
+                    <a href="history_detail.html?id=125" class="history-item block bg-white rounded-xl p-4 flex items-center justify-between border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="plus-circle" class="w-5 h-5 text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">Top Up Saldo Retribusi</p>
+                                <p class="text-xs text-slate-500 mt-0.5">20 November 2025 | Berhasil</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-green-600">+ Rp 100.000</p>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                    </a>
+
+                    <!-- Item Transaksi Tertunda -->
+                    <a href="history_detail.html?id=126" class="history-item block bg-white rounded-xl p-4 flex items-center justify-between border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="loader" class="w-5 h-5 text-orange-600 animate-spin"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">Pembayaran Retribusi Kios B05</p>
+                                <p class="text-xs text-slate-500 mt-0.5">15 November 2025 | Tertunda</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-red-600">- Rp 25.000</p>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                    </a>
+
+                    <!-- Item Transaksi Gagal -->
+                    <a href="history_detail.html?id=127" class="history-item block bg-white rounded-xl p-4 flex items-center justify-between border border-slate-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-red-600"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800">Top Up Saldo Retribusi</p>
+                                <p class="text-xs text-slate-500 mt-0.5">10 November 2025 | Gagal</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <p class="font-bold text-slate-400">Rp 50.000</p>
+                            <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                    </a>
+
+                    <!-- Indikator Loading atau End of List -->
+                    <div class="text-center py-6 text-slate-500 text-sm">
+                        <i data-lucide="infinity" class="w-5 h-5 mx-auto text-bca-main/50 mb-2"></i>
+                        <p>Akhir dari semua riwayat</p>
+                    </div>
+
+                </section>
+            </div>
+
+            <!-- Placeholder Footer/Navbar Bawah -->
+            <footer class="md:hidden bg-white border-t border-slate-200 p-4 pb-safe flex justify-around"></footer>
+
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

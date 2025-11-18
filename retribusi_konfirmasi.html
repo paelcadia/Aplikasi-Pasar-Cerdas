@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Pilih Metode Bayar</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: { dark: '#003D79', main: '#0060AF', light: '#E5F3FF', gold: '#DAA520', }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20"></aside>
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <!-- Tombol kembali ke Detail Tagihan -->
+                <a href="retribusi_detail.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Konfirmasi Pembayaran</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <!-- RINCIAN TAGIHAN RINGKAS -->
+                <section class="mb-6">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4">Rincian Tagihan</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="store" class="w-5 h-5 text-bca-main"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Retribusi Kios A-12</h3>
+                                <p class="text-xs text-slate-500">Periode November 2025</p>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-dashed border-slate-200">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-slate-500">Jumlah Tagihan</span>
+                                <span class="text-base font-bold text-bca-dark">Rp 15.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PILIH METODE PEMBAYARAN -->
+                <section class="mb-6">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4">Metode Pembayaran</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-4">
+                        <form id="payment-method-form" class="space-y-4">
+                            
+                            <!-- OPSI 1: Saldo Retribusi (Default) -->
+                            <label for="saldo" class="flex items-center justify-between p-4 border border-blue-500/30 rounded-xl cursor-pointer has-[:checked]:border-bca-main bg-blue-50 transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-bca-main/10 flex items-center justify-center">
+                                        <i data-lucide="wallet" class="w-5 h-5 text-bca-main"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-800">Saldo Retribusi</p>
+                                        <p class="text-xs text-slate-500">Saldo: Rp 1.250.000</p>
+                                    </div>
+                                </div>
+                                <input type="radio" id="saldo" name="payment_method" value="pin" checked class="form-radio h-5 w-5 text-bca-main focus:ring-bca-main border-gray-300">
+                            </label>
+
+                            <!-- OPSI 2: QRIS (Digital) -->
+                            <label for="qris" class="flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-bca-main hover:bg-slate-50 transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                                        <i data-lucide="scan-line" class="w-5 h-5 text-slate-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-800">QRIS (Semua Bank/E-Wallet)</p>
+                                        <p class="text-xs text-slate-500">Biaya admin: Rp 0</p>
+                                    </div>
+                                </div>
+                                <input type="radio" id="qris" name="payment_method" value="qris" class="form-radio h-5 w-5 text-bca-main focus:ring-bca-main border-gray-300">
+                            </label>
+
+                            <!-- OPSI 3: Transfer Bank (Placeholder) -->
+                            <label for="transfer" class="flex items-center justify-between p-4 border border-slate-200 rounded-xl cursor-pointer has-[:checked]:border-bca-main hover:bg-slate-50 transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                                        <i data-lucide="banknote" class="w-5 h-5 text-slate-500"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-slate-800">Transfer Bank</p>
+                                        <p class="text-xs text-slate-500">Biaya admin: Rp 2.500</p>
+                                    </div>
+                                </div>
+                                <input type="radio" id="transfer" name="payment_method" value="transfer" class="form-radio h-5 w-5 text-bca-main focus:ring-bca-main border-gray-300">
+                            </label>
+
+                        </form>
+                    </div>
+                </section>
+
+                <!-- RINCIAN PEMBAYARAN AKHIR -->
+                <section class="mb-8">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4">Rincian Pembayaran</h2>
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 space-y-3">
+                        <div class="flex justify-between text-sm text-slate-500">
+                            <span>Total Tagihan</span>
+                            <span class="font-semibold text-slate-800">Rp 15.000</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-500" id="admin-fee-row">
+                            <span>Biaya Admin</span>
+                            <span class="font-semibold text-slate-800" id="admin-fee">Rp 0</span>
+                        </div>
+                        
+                        <!-- Total Akhir -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-bca-dark">TOTAL AKHIR</span>
+                                <span class="text-xl font-bold text-bca-dark" id="total-akhir">Rp 15.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TOMBOL BAYAR SEKARANG (Fixed Footer) -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <!-- Tombol yang akan membawa ke halaman PIN atau QRIS -->
+                <button id="btn-lanjutkan" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/50 hover:bg-bca-dark transition">
+                    BAYAR SEKARANG
+                </button>
+            </footer>
+
+        </main>
+        
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const form = document.getElementById('payment-method-form');
+        const adminFeeElement = document.getElementById('admin-fee');
+        const totalAkhirElement = document.getElementById('total-akhir');
+        const btnLanjutkan = document.getElementById('btn-lanjutkan');
+        const BASE_AMOUNT = 15000;
+        
+        // Mengubah tampilan biaya admin dan total berdasarkan metode
+        function updatePaymentDetails(method) {
+            let adminFee = 0;
+            let totalAmount = BASE_AMOUNT;
+
+            if (method === 'transfer') {
+                adminFee = 2500;
+            }
+            
+            totalAmount = BASE_AMOUNT + adminFee;
+            
+            // Update UI
+            adminFeeElement.textContent = adminFee > 0 ? `Rp ${adminFee.toLocaleString('id-ID')}` : 'Rp 0';
+            totalAkhirElement.textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
+            btnLanjutkan.textContent = `BAYAR SEKARANG (Rp ${totalAmount.toLocaleString('id-ID')})`;
+        }
+
+        // Handle perubahan radio button
+        form.addEventListener('change', (e) => {
+            if (e.target.name === 'payment_method') {
+                updatePaymentDetails(e.target.value);
+
+                // Update styling radio button
+                document.querySelectorAll('#payment-method-form label').forEach(label => {
+                    label.classList.remove('bg-blue-50', 'border-blue-500/30');
+                    label.classList.add('border-slate-200', 'hover:bg-slate-50');
+                });
+
+                e.target.closest('label').classList.add('bg-blue-50', 'border-blue-500/30');
+                e.target.closest('label').classList.remove('border-slate-200', 'hover:bg-slate-50');
+            }
+        });
+        
+        // Handle klik tombol Lanjutkan
+        btnLanjutkan.addEventListener('click', () => {
+            const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            
+            if (selectedMethod === 'pin') {
+                // Arahkan ke halaman input PIN
+                window.location.href = 'retribusi_pin.html';
+            } else if (selectedMethod === 'qris') {
+                // Arahkan ke halaman QRIS
+                window.location.href = 'retribusi_qris.html';
+            } else {
+                // Contoh Transfer (kita arahkan ke halaman QRIS untuk sementara)
+                showCustomModal('info', 'Metode Belum Tersedia', 'Metode Transfer Bank saat ini sedang dalam proses integrasi.');
+            }
+        });
+
+        // --- Custom Modal/Notification Function --- (Diambil dari file sebelumnya)
+        function showCustomModal(type, title, message) {
+            const modal = document.createElement('div');
+            modal.id = 'custom-modal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 transition-opacity duration-300 opacity-0';
+            
+            const cardClass = 'border-blue-400 bg-white shadow-xl max-w-sm w-full rounded-2xl p-6 transform translate-y-4 transition-transform duration-300';
+            const icon = '<div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="info" class="w-7 h-7 text-blue-600"></i></div>';
+
+            modal.innerHTML = `
+                <div class="${cardClass}">
+                    ${icon}
+                    <h3 class="text-xl font-bold text-center mb-2">${title}</h3>
+                    <p class="text-sm text-center text-slate-600 mb-6">${message}</p>
+                    <button id="modal-close-btn" class="w-full bg-bca-main text-white font-semibold py-3 rounded-xl hover:bg-bca-dark transition">
+                        Tutup
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('translate-y-4');
+            }, 10);
+
+            const closeHandler = () => {
+                modal.classList.add('opacity-0');
+                modal.querySelector('div').classList.add('translate-y-4');
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            };
+
+            document.getElementById('modal-close-btn').addEventListener('click', closeHandler);
+            modal.addEventListener('click', (e) => {
+                if (e.target.id === 'custom-modal') {
+                    closeHandler();
+                }
+            });
+        }
+
+        // Init: Pastikan total dan biaya admin sudah benar saat pertama kali dimuat
+        updatePaymentDetails('pin');
+    </script>
+</body>
+</html>

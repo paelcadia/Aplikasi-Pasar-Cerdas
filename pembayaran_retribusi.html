@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasar Cerdas - Pembayaran Retribusi</title>
+    
+    <!-- Menggunakan Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Menggunakan Font Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Menggunakan Config Warna yang Sama (MyBCA Style) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bca: {
+                            dark: '#003D79',   /* Biru Gelap Khas BCA */
+                            main: '#0060AF',   /* Biru Utama */
+                            light: '#E5F3FF',  /* Biru Muda Background */
+                            gold: '#DAA520',   /* Aksen Gold/Kuning */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Style untuk input PIN, agar terlihat seperti kotak-kotak */
+        .pin-input input {
+            width: 3.5rem; /* Ukuran yang nyaman */
+            height: 3.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #ccc;
+            border-radius: 0.75rem;
+            margin-right: 0.5rem;
+            transition: all 0.2s;
+            caret-color: transparent; /* Sembunyikan kursor agar fokus di border */
+        }
+        .pin-input input:focus {
+            border-color: #0060AF; /* Warna fokus BCA */
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 96, 175, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+
+        <!-- ========================== -->
+        <!-- SIDEBAR (Desktop Only)     -->
+        <!-- ========================== -->
+        <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20">
+            <div class="p-6 flex items-center gap-3 border-b border-slate-100">
+                <div class="w-8 h-8 bg-bca-dark rounded-lg flex items-center justify-center">
+                    <i data-lucide="store" class="text-white w-5 h-5"></i>
+                </div>
+                <h1 class="font-bold text-xl text-bca-dark">Pasar Cerdas</h1>
+            </div>
+            
+            <nav class="flex-1 p-4 space-y-2">
+                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    <span class="text-sm">Beranda</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                    <i data-lucide="compass" class="w-5 h-5"></i>
+                    <span class="text-sm">Jelajah</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                    <i data-lucide="scan-line" class="w-5 h-5"></i>
+                    <span class="text-sm">Scan QR</span>
+                </a>
+                <a href="notifikasi.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="text-sm">Notifikasi</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                    <span class="text-sm">Profil</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ========================== -->
+        <!-- KONTEN UTAMA               -->
+        <!-- ========================== -->
+        <main class="flex-1 md:ml-64 flex flex-col">
+            
+            <!-- HEADER MOBILE: Judul Halaman & Back Button -->
+            <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex items-center">
+                <a href="index.html" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                </a>
+                <h1 class="font-bold text-xl text-bca-dark ml-4">Bayar Retribusi</h1>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-5 md:p-8 max-w-2xl mx-auto w-full">
+                
+                <!-- KARTU DETAIL PEMBAYARAN (AREA 1 ATAS) -->
+                <section class="mb-6">
+                    <h2 class="font-bold text-lg text-slate-700 mb-4">Konfirmasi Pembayaran</h2>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 space-y-4">
+                        
+                        <!-- Header Kartu -->
+                        <div class="flex items-center gap-3 border-b pb-4 mb-2">
+                            <div class="w-10 h-10 bg-bca-main/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="receipt" class="w-5 h-5 text-bca-main"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base">Retribusi Kios A-12</h3>
+                                <p class="text-xs text-slate-500">Periode November 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Detail Jumlah -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-500">Jumlah Tagihan</span>
+                            <span class="text-sm font-semibold text-slate-800">Rp 15.000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-500">Biaya Administrasi</span>
+                            <span class="text-sm font-semibold text-slate-800">Rp 0</span>
+                        </div>
+                        
+                        <!-- Divider & Total -->
+                        <div class="pt-4 border-t border-dashed border-slate-200">
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-bca-dark">TOTAL PEMBAYARAN</span>
+                                <span class="text-xl font-bold text-bca-dark">Rp 15.000</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INPUT PIN (AREA 1 BAWAH) -->
+                <section class="mb-6">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                        <h3 class="font-semibold text-slate-700 mb-4 text-center">Masukkan PIN Transaksi</h3>
+                        
+                        <div class="flex justify-center gap-2 pin-input">
+                            <!-- Input tersembunyi untuk menampung PIN -->
+                            <input type="text" id="pin-0" maxlength="1" inputmode="numeric" class="focus:border-bca-main">
+                            <input type="text" id="pin-1" maxlength="1" inputmode="numeric">
+                            <input type="text" id="pin-2" maxlength="1" inputmode="numeric">
+                            <input type="text" id="pin-3" maxlength="1" inputmode="numeric">
+                            <input type="text" id="pin-4" maxlength="1" inputmode="numeric">
+                            <input type="text" id="pin-5" maxlength="1" inputmode="numeric">
+                        </div>
+                        
+                        <p class="text-xs text-red-500 text-center mt-3 hidden" id="pin-error">
+                            PIN yang Anda masukkan salah.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Peringatan Saldo -->
+                <div class="text-center text-sm text-slate-500 mt-4 mb-8">
+                    Saldo Retribusi Anda saat ini: <span class="font-bold text-bca-main">Rp 1.250.000</span>
+                </div>
+            </div>
+
+            <!-- TOMBOL BAYAR (AREA 2) -->
+            <!-- Fixed di bawah, mobile friendly -->
+            <footer class="sticky bottom-0 bg-white border-t border-slate-200 p-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe mt-auto">
+                <button id="btn-bayar" class="w-full bg-bca-main text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-500/50 hover:bg-bca-dark transition disabled:bg-slate-300 disabled:shadow-none" disabled>
+                    BAYAR SEKARANG (Rp 15.000)
+                </button>
+            </footer>
+
+        </main>
+
+        <!-- Bottom Nav (Mobile) - Tidak ditampilkan di halaman ini karena ini adalah transaksi -->
+        <!-- Namun, perlu dipertimbangkan jika user mobile ingin ke halaman lain. Di sini kita biarkan footer fixed tombol bayar yang mendominasi. -->
+        
+    </div>
+
+    <!-- Script untuk mengaktifkan icon Lucide dan logika PIN -->
+    <script>
+        lucide.createIcons();
+
+        // Logika Input PIN (berdasarkan wireframe)
+        const pinInputs = document.querySelectorAll('.pin-input input');
+        const btnBayar = document.getElementById('btn-bayar');
+
+        // Fungsi untuk fokus ke input berikutnya
+        function handleInput(e) {
+            const currentInput = e.target;
+            const nextInput = currentInput.nextElementSibling;
+            
+            // Pindahkan fokus ke input berikutnya jika karakter sudah terisi
+            if (currentInput.value.length === currentInput.maxLength && nextInput) {
+                nextInput.focus();
+            }
+
+            checkPinCompletion();
+        }
+
+        // Fungsi untuk fokus ke input sebelumnya saat Backspace
+        function handleKeyDown(e) {
+            const currentInput = e.target;
+            const prevInput = currentInput.previousElementSibling;
+
+            if (e.key === 'Backspace' && currentInput.value.length === 0 && prevInput) {
+                prevInput.focus();
+            }
+
+            // Hanya izinkan angka
+            if (e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && isNaN(parseInt(e.key))) {
+                e.preventDefault();
+            }
+        }
+
+        // Cek apakah semua input PIN sudah terisi
+        function checkPinCompletion() {
+            let isComplete = true;
+            pinInputs.forEach(input => {
+                if (input.value.length === 0) {
+                    isComplete = false;
+                }
+            });
+
+            // Aktifkan/Nonaktifkan tombol bayar
+            if (isComplete) {
+                btnBayar.disabled = false;
+            } else {
+                btnBayar.disabled = true;
+            }
+        }
+
+        // Tambahkan event listener ke setiap input
+        pinInputs.forEach(input => {
+            input.addEventListener('input', handleInput);
+            input.addEventListener('keydown', handleKeyDown);
+            // Agar fokus langsung ke input pertama saat halaman dimuat
+            if (input.id === 'pin-0') {
+                input.focus();
+            }
+        });
+
+        // Logika tombol bayar (Mockup Transaksi)
+        btnBayar.addEventListener('click', () => {
+            const enteredPin = Array.from(pinInputs).map(input => input.value).join('');
+            
+            // Mockup: Misal PIN benar adalah "123456"
+            if (enteredPin === "123456") {
+                // Tampilkan notifikasi sukses (menggunakan modal/div custom, bukan alert)
+                showCustomModal('success', 'Pembayaran Berhasil!', 'Retribusi Kios A-12 untuk periode November 2025 sebesar Rp 15.000 telah lunas.');
+                document.getElementById('pin-error').classList.add('hidden');
+                btnBayar.disabled = true; // Nonaktifkan setelah berhasil
+            } else {
+                // Tampilkan pesan error
+                document.getElementById('pin-error').classList.remove('hidden');
+                pinInputs.forEach(input => input.value = ''); // Kosongkan input
+                document.getElementById('pin-0').focus(); // Fokus kembali ke awal
+                btnBayar.disabled = true; // Nonaktifkan tombol
+            }
+        });
+        
+        // --- Custom Modal/Notification Function (Ganti Alert) ---
+        function showCustomModal(type, title, message) {
+            // Buat elemen modal
+            const modal = document.createElement('div');
+            modal.id = 'custom-modal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 transition-opacity duration-300 opacity-0';
+            
+            const cardClass = type === 'success' 
+                ? 'border-green-400 bg-white shadow-xl max-w-sm w-full rounded-2xl p-6 transform translate-y-4 transition-transform duration-300'
+                : 'border-red-400 bg-white shadow-xl max-w-sm w-full rounded-2xl p-6 transform translate-y-4 transition-transform duration-300';
+
+            const icon = type === 'success'
+                ? '<div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="check-circle-2" class="w-7 h-7 text-green-600"></i></div>'
+                : '<div class="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="x-circle" class="w-7 h-7 text-red-600"></i></div>';
+
+            modal.innerHTML = `
+                <div class="${cardClass}">
+                    ${icon}
+                    <h3 class="text-xl font-bold text-center mb-2">${title}</h3>
+                    <p class="text-sm text-center text-slate-600 mb-6">${message}</p>
+                    <button id="modal-close-btn" class="w-full bg-bca-main text-white font-semibold py-3 rounded-xl hover:bg-bca-dark transition">
+                        Selesai
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+            lucide.createIcons(); // Re-render icons inside the modal
+            
+            // Animasi masuk
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('translate-y-4');
+            }, 10);
+
+            // Logika tutup modal
+            const closeHandler = () => {
+                modal.classList.add('opacity-0');
+                modal.querySelector('div').classList.add('translate-y-4');
+                setTimeout(() => {
+                    modal.remove();
+                }, 300);
+            };
+
+            document.getElementById('modal-close-btn').addEventListener('click', closeHandler);
+            modal.addEventListener('click', (e) => {
+                if (e.target.id === 'custom-modal') {
+                    closeHandler();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
