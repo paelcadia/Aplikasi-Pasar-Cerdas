@@ -42,7 +42,7 @@
         <!-- ========================== -->
         <!-- SIDEBAR (Desktop Only)     -->
         <!-- ========================== -->
-        <!-- Sidebar ini sama persis dengan index.html untuk konsistensi -->
+        <!-- Sidebar ini sama persis dengan main_dashboard.html untuk konsistensi -->
         <aside class="hidden md:flex w-64 bg-white border-r border-slate-200 flex-col fixed h-full z-20">
             <div class="p-6 flex items-center gap-3 border-b border-slate-100">
                 <div class="w-8 h-8 bg-bca-dark rounded-lg flex items-center justify-center">
@@ -52,7 +52,7 @@
             </div>
             
             <nav class="flex-1 p-4 space-y-2">
-                <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
+                <a href="main_dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-bca-dark transition-colors">
                     <i data-lucide="home" class="w-5 h-5"></i>
                     <span class="text-sm">Beranda</span>
                 </a>
@@ -96,7 +96,7 @@
             <header class="bg-white sticky top-0 z-10 px-5 py-4 shadow-sm md:shadow-none md:border-b md:px-8 flex justify-between items-center">
                 <div class="flex items-center gap-4">
                     <!-- Tombol Back hanya di mobile -->
-                    <a href="index.html" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
+                    <a href="main_dashboard.html" class="md:hidden p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-full">
                         <i data-lucide="arrow-left" class="w-6 h-6"></i>
                     </a>
                     <h1 class="font-bold text-xl text-bca-dark">Notifikasi</h1>
@@ -239,10 +239,10 @@
         <!-- ========================== -->
         <!-- BOTTOM NAVIGATION (Mobile) -->
         <!-- ========================== -->
-        <!-- Sama dengan index.html tapi active state di tombol Pesan/Notif -->
+        <!-- Sama dengan main_dashboard.html tapi active state di tombol Pesan/Notif -->
         <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-30 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
             
-            <a href="index.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 w-14">
+            <a href="main_dashboard.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 w-14">
                 <i data-lucide="home" class="w-6 h-6"></i>
                 <span class="text-[10px] font-medium">Beranda</span>
             </a>
@@ -276,4 +276,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>
